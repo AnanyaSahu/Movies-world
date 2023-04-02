@@ -1,0 +1,15 @@
+.seat-rows{
+margin: 7px;
+}
+
+.display-flex{
+    display: flex; 
+}
+
+.seat-available{
+color: grey;
+}
+
+.seat-booked{
+color: red
+}
