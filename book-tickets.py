@@ -12,6 +12,7 @@ def showSeats(theaterId,movieId):
     getTherterQuery = "SELECT [thearerName],[areaId],[rowRange],[ColumnRange] FROM [movieDb].[dbo].[Theater] where [theaterId] = "+theaterId +";"
     getBookedTickets = "SELECT [seatBooked] FROM [movieDb].[dbo].[Booking] where [theraterId] = "+theaterId +" AND [movieId]='"+ movieId  +"';"
     cursor.execute(getTherterQuery)
+    print( 'record')
     record = cursor.fetchall()
     print( record)
     row = record[0][2].split(',')
@@ -34,7 +35,7 @@ def showSeats(theaterId,movieId):
              else: seatDictionary[seat] = 'A'
     
     outputDict = {'row': row, 'column': column ,'seats': seatDictionary}
-    print(outputDict)
+    # print(outputDict)
     return outputDict
      
     
