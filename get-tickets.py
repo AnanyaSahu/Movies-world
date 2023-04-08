@@ -1,5 +1,16 @@
 # Baran Azak
+# commited changes
 import pyodbc
+import requests
+
+
+# def download_database_file():
+#    url = 'https://example.com/'
+#    response = requests.get(url)
+#    with open('LAPTOP-PG8J0ME5\SQLEXPRESS', 'wb') as f:
+#        f.write(response.content)
+#    print('Database file downloaded !')
+
 
 try:
     # if u have used window authentication for local running DB
@@ -22,21 +33,25 @@ try:
             WHERE Booking.bookingId = ?
             """, (booking_id,))
         # Fetch results
-        result = cursor.fetchone()
-
-        # Print booking details
-        print("Theater Name:", result[0])
-        print("Theater Area:", result[1])
-        print("Customer Name:", result[2])
-        print("Movie Name:", result[3])
-        print("Show Timing:", result[4])
-        print("Booked Seats:", result[5])
-
+        results = cursor.fetchall()
 
 except Exception as e:
     print("Error while connecting to DB", e)
 
+# Closing DB
 finally:
     cursor.close()
     dbConnection.close()
     print("db connection closed")
+
+    # Write the results to a file
+    with open('bookingdetails.txt', 'w') as f:
+        for theater_name, area_name, customer_name, movie_name, show_timing, seat_booked in results:
+            f.write("The booking details for booking ID {} are:\n".format(booking_id))
+            f.write("Theater Name: {}\n".format(theater_name))
+            f.write("Theater Area: {}\n".format(area_name))
+            f.write("Customer Name: {}\n".format(customer_name))
+            f.write("Movie Name: {}\n".format(movie_name))
+            f.write("Show Timing: {}\n".format(show_timing))
+            f.write("Booked Seats: {}\n".format(seat_booked))
+            f.write("\n")
