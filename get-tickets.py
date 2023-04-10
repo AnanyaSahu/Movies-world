@@ -1,7 +1,7 @@
 # Baran Azak
 # commited changes
-import pyodbc
-import requests
+# import pyodbc
+# import requests
 from database import openDbConnection
 
 

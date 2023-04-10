@@ -44,6 +44,14 @@
                     <div><button id="apply-modal-btn" type="button" class="btn-primary">Book Tickets</button></div> -->
                         
                 </div>
+                <div class="movie-conatiner" id="display-movie">
+                    <h5> Select the movie</h5>
+                    <div class=" container-fluid row" id="movie-list">
+                    </div>
+                    <!-- <div class=" container-fluid row" id="selected-seats"></div>
+                    <div><button id="apply-modal-btn" type="button" class="btn-primary">Book Tickets</button></div> -->
+                        
+                </div>
 
                 <div class="seat-selection-cotainer" id="seat-selection-cotainer">
                     <h5> Select you seat</h5>
@@ -68,6 +76,9 @@
                         <hr>
                         <label for="name"><b>Booking Customer Name</b></label>
                         <input type="text" placeholder="Enter full name" name="name" id="customer-name">
+
+                        <label for="name"><b>New Customer Name</b></label>
+                        <input type="text" placeholder="Enter full name" name="new-name" id="new-customer-name">
                         <!-- <br><br>
                         <label for="email"><b>Therater ID</b></label>
                         <input type="text" placeholder="Enter Therater Id" name="email">
@@ -81,8 +92,19 @@
                      
                         <br><br>
                         <div class="">
-                            <div id="error-msg" class="error-msg"></div>
+                           
                             <button type="button" class="btn-primary" onclick="getBookingsForCustomer()">Get Bookings</button>
+                        </div>
+
+                        <div class = 'user-booings' id ='user-booking'></div>
+
+                        <div class="cancel-booking" id="cancel-booking">
+                            
+                            <button type="button" class="btn-primary" onclick="cancelBookingForUser()">Cancel Bookings</button>
+                        </div>
+                        <div class="cancel-booking" id="cancel-booking">
+                            
+                            <button type="button" class="btn-primary" onclick="modifyBookingForUser()">Update Booking Name</button>
                         </div>
                     </div>
                 </form>

@@ -21,9 +21,10 @@ def search_theaters(api_key, latitude, longitude):
 def  getAreas():
     cursor = openDbConnection()
     getAreaQuery = "SELECT *FROM  [movieDb].[dbo].[Area];" 
-    record = cursor.execute(getAreaQuery)
-    print(record.fetchall())
+    record = cursor.execute(getAreaQuery).fetchall()
+    print(record)
     r= [tuple(row) for row in record]
+    print(r)
     return {'rows': r}
 
 
@@ -86,4 +87,4 @@ def getTheaters(area):
     
 
 
-get_nearby_theaters(200)
+# get_nearby_theaters(200)

@@ -100,6 +100,17 @@ background-color: red;
     display: none;
   }
 
+  .movie-conatiner{
+    display: none;
+  }
+
+  .user-booings{
+    display: none;
+  }
+
+  .cancelbooking{
+    display: none;
+  }
 /* Css for header start */
   .header {
     position: sticky;

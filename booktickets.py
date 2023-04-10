@@ -39,8 +39,8 @@ def showSeats(theaterId,movieId):
              else: seatDictionary[seat] = 'A'
     
     outputDict = {'row': row, 'column': column ,'seats': seatDictionary}
-    # print(outputDict)
-    return outputDict
+    print(outputDict)
+    return {'rows':outputDict}
      
     
 # return seats booked n available in theater
@@ -69,41 +69,34 @@ def bookTickets(theraterId, movieId,seats, customerName, customerAge ):
     
 # RETURN BOOKED TICKET with customer name tehater name movie name seats
 
-# def calculateRemaingSeats(bookedSeats,theraterId, movieId ):
-#     # if endof column in row is less tha startcolumn + number of seats donot allow selection
-#     pass
+
 
 def cancelUserBooking( bookingId):
     #delete the booking
     cursor = openDbConnection()
-    cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [[bookingId]]= "+bookingId
-    # print(cancelBookingQuery)
+    cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [bookingId]= "+bookingId
+    print(cancelBookingQuery)
     cursor.execute(cancelBookingQuery)
     cursor.commit()
+    return {'msg':'Your booking has been cancelled'}
 
 def  getBookingsForCustomer(name):
     cursor = openDbConnection()
-    getBookingsForCustomerQuery = "SELECT * FROM [movieDb].[dbo].[Booking] where [customerName] = '"+name +"';" 
+    getBookingsForCustomerQuery = "SELECT b.bookingId , b.customerName, b.seatBooked ,m.movieId,m.movieName , m.showTiming, t.theaterId, t.thearerName from [movieDb].[dbo].[Booking] b Inner join [movieDb].[dbo].[Theater] t on t.theaterId = b.theraterId Inner join [movieDb].[dbo].[Movie] m on m.movieId = b.movieId where b.customerName ='"+name +"';" 
+    print(getBookingsForCustomerQuery)
     record = cursor.execute(getBookingsForCustomerQuery).fetchall()
     r= [tuple(row) for row in record]
-    jsonArr = []
-    # for eachrecord in record:
-    #     jsonStr = json.dumps(eachrecord)
-    #     jsonArr.append(jsonStr)
-
- 
-    print(r)
     return {'rows': r}
-    # print(record.fetchall())
 
 
 def updateCustomerName(bookingID, newCustomerName):
     #delete the booking
     cursor = openDbConnection()
-    cancelBookingQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = "+ newCustomerName+" WHERE [bookingID]= "+bookingID
-    print(cancelBookingQuery)
-    cursor.execute(cancelBookingQuery)
+    updateCustomerNameQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = '"+ newCustomerName+"' WHERE [bookingID]= "+bookingID
+    print(updateCustomerNameQuery)
+    cursor.execute(updateCustomerNameQuery)
     cursor.commit()
+    return {'msg':'Your booking has been modified'}
 
 
 # bookTickets(104,107,'B-1','Divya',19)

@@ -2,10 +2,12 @@ from flask import Flask
 from flask import request
 from flask_mysqldb import MySQL
 from flask_cors import CORS
-from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBooking, cancelUserBooking,updateCustomerName
-from movieshows import getAreas, getTheaters
+from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBooking, cancelUserBooking,updateCustomerName,showSeats
+# from movieshows import  getTheaters
+from movietheaters import getAreas
 # from movietheaters import getSeatsForMovie
 from movietheaters import get_nearby_theaters
+from movieshows import get_movies_by_theatre
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -34,10 +36,13 @@ def  getAreaList():
 def  getListTheraters(area):
     return get_nearby_theaters(area)
 
+@app.route('/getMovieList/<theaterId>', methods=['GET'])
+def  getMovieist(theaterId):
+    return get_movies_by_theatre(theaterId)
 
-# @app.route('/showSeats/<theaterId>/<movieId>', methods=['GET'])
-# def  showSeatsForMovie(theaterId,movieId):
-#     getSeatsForMovie(theaterId,movieId)
+@app.route('/showSeats/<theaterId>/<movieId>', methods=['GET'])
+def  showSeatsForMovie(theaterId,movieId):
+    return showSeats(theaterId,movieId)
 
 
 @app.route('/cancelTickets/<bookingId>', methods=['GET'])
