@@ -4,7 +4,8 @@ from flask_mysqldb import MySQL
 from flask_cors import CORS
 from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBooking, cancelUserBooking,updateCustomerName
 from movieshows import getAreas, getTheaters
-from movietheaters import getSeatsForMovie
+# from movietheaters import getSeatsForMovie
+from movietheaters import get_nearby_theaters
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -31,12 +32,12 @@ def  getAreaList():
 
 @app.route('/getTheratersList/<area>', methods=['GET'])
 def  getListTheraters(area):
-    return getTheaters(area)
+    return get_nearby_theaters(area)
 
 
-@app.route('/showSeats/<theaterId>/<movieId>', methods=['GET'])
-def  showSeatsForMovie(theaterId,movieId):
-    getSeatsForMovie(theaterId,movieId)
+# @app.route('/showSeats/<theaterId>/<movieId>', methods=['GET'])
+# def  showSeatsForMovie(theaterId,movieId):
+#     getSeatsForMovie(theaterId,movieId)
 
 
 @app.route('/cancelTickets/<bookingId>', methods=['GET'])
