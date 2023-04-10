@@ -43,3 +43,7 @@ def display_nearby_theatres(nearby_theatres):
 # if __name__ == "__main__":
 #     main()
 
+
+def getSeatsForMovie(theaterId,movieId):
+    # sort closest to farthgest from ara
+    return {'rows': []}

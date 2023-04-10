@@ -1,4 +1,8 @@
 from database import openDbConnection
+from flask import Flask
+from flask import request
+import json
+app = Flask(__name__)
 # 
 # INSERT INTO [dbo].[Area] ([areaName],[location]) VALUES('Parnell Street' ,'100')
 # INSERT INTO [dbo].[Movie] ([movieName] ,[showTiming] ,[duration] ,[ageConstraint]) VALUES ('Ant-Man and The Wasp: Quantumania','1330','110 min','14');
@@ -69,16 +73,39 @@ def bookTickets(theraterId, movieId,seats, customerName, customerAge ):
 #     # if endof column in row is less tha startcolumn + number of seats donot allow selection
 #     pass
 
-def cancelBooking(theraterId, movieId,seats, customerName):
+def cancelUserBooking( bookingId):
     #delete the booking
     cursor = openDbConnection()
-    cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [theraterId]= "+theraterId+" AND [movieId] = "+movieId+" AND [customerName] = "+customerName+" AND [seatBooked]= "+seats
+    cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [[bookingId]]= "+bookingId
+    # print(cancelBookingQuery)
+    cursor.execute(cancelBookingQuery)
+    cursor.commit()
+
+def  getBookingsForCustomer(name):
+    cursor = openDbConnection()
+    getBookingsForCustomerQuery = "SELECT * FROM [movieDb].[dbo].[Booking] where [customerName] = '"+name +"';" 
+    record = cursor.execute(getBookingsForCustomerQuery).fetchall()
+    r= [tuple(row) for row in record]
+    jsonArr = []
+    # for eachrecord in record:
+    #     jsonStr = json.dumps(eachrecord)
+    #     jsonArr.append(jsonStr)
+
+ 
+    print(r)
+    return {'rows': r}
+    # print(record.fetchall())
+
+
+def updateCustomerName(bookingID, newCustomerName):
+    #delete the booking
+    cursor = openDbConnection()
+    cancelBookingQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = "+ newCustomerName+" WHERE [bookingID]= "+bookingID
     print(cancelBookingQuery)
     cursor.execute(cancelBookingQuery)
     cursor.commit()
 
 
-
 # bookTickets(104,107,'B-1','Divya',19)
 # cancelBooking('104','107',"'B-1'","'Divya'")
-showSeats('104','107')
+# showSeats('104','107')

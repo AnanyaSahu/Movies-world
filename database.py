@@ -1,26 +1,53 @@
 import pyodbc
 
-try:
-    # if u have used window authentication for local running DB
-    dbConnection = pyodbc.connect('Driver={SQL Server};'
-                      'Server=<server-name>;'
-                      'Database=<table_name>;'
+global dbConnection
+global cursor
+
+
+# try:
+#     dbConnection = pyodbc.connect('Driver={SQL Server};'
+#                       'Server=ANNA\MSSQLSERVER03;'
+#                       'Database=Travel DB;'
+#                       'Trusted_Connection=yes;')
+
+#     if True:
+#         cursor = dbConnection.cursor()
+#         cursor.execute("SELECT [adminId],[adminName] FROM [Travel DB].[dbo].[Admin];")
+
+#         record = cursor.fetchall()
+
+#         print( record)
+
+# except Exception as e:
+#     print("Error while connecting to DB", e)
+
+# finally:
+#     # if dbConnection.is_connected():
+
+
+def openDbConnection():
+    try:
+        dbConnection = pyodbc.connect('Driver={SQL Server};'
+                      'Server=ANNA\MSSQLSERVER03;'
+                      'Database=Travel DB;'
                       'Trusted_Connection=yes;')
 
-    if True:
-        cursor = dbConnection.cursor()
+        if dbConnection.getinfo != None:
+            cursor = dbConnection.cursor()
+            # cursor.execute("SELECT [adminId],[adminName] FROM [Travel DB].[dbo].[Admin];")
 
-        cursor.execute("SELECT * from tableName;")
+            # record = cursor.fetchall()
 
-        record = cursor.fetchall()
+        # print( record)
+        return cursor
 
-        print( record)
+    except Exception as e:
+        print("Error while connecting to DB", e)
 
-except Exception as e:
-    print("Error while connecting to DB", e)
 
-finally:
-    # if dbConnection.is_connected():
-        cursor.close()
-        dbConnection.close()
-        print("db connection closed")
+
+def closeDbConnection():
+        if dbConnection.getinfo != None:
+            cursor.close()
+            dbConnection.close()
+            print("db connection closed")
