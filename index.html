@@ -14,37 +14,93 @@
 
 </head>
 
-<body>
+<body class ="primary-color-body">
     <main>
-                   
+        <div class="header primary-color">
+            <div class="primary-color"><img class="img-container" src="./movies-world.png" alt="Movies workd logo" width="60"></div>
+            <a class="active" href="../index.html"><b>Home</b></a>
+          </div>  
 
-                    <div class="dropdown">
-                        <button class="dropbtn">select area</button>
-                        <div class="dropdown-content" id="area-list">
-                        </div>
-                      </div>
-                      <div class="theater-conatiner" id="display-theater">
-                        <h5> Select the theater</h5>
-                        <div class=" container-fluid row" id="theater-list">
-                        </div>
-                        <!-- <div class=" container-fluid row" id="selected-seats"></div>
-                        <div><button id="apply-modal-btn" type="button" class="btn-primary">Book Tickets</button></div> -->
-                            
+          <div class = 'card'>
+            
+          <div class = 'card-content'>
+            <div class="tab">
+                <button class="tablinks primary-color" onclick="openTab(event, 'BookMovieTickets')">Book Movie Tickets</button>
+                <button class="tablinks primary-color" onclick="openTab(event, 'CancelBooking')">Cancel Booking</button>
+                <button class="tablinks primary-color" onclick="openTab(event, 'ModifyBooking')">Modify Booking</button>
+              </div>
+
+              <div id="BookMovieTickets" class="tabcontent">
+                <div class="dropdown">
+                    <button class="dropbtn">select area</button>
+                    <div class="dropdown-content" id="area-list">
                     </div>
-
-                    <div class="seat-selection-cotainer" id="seat-selection-cotainer">
-                        <h5> Select you seat</h5>
-                        <div class=" container-fluid row" id="seats">
-                        </div>
-                        <div class=" container-fluid row" id="selected-seats"></div>
-                        <div><button id="apply-modal-btn" type="button" class="btn-primary" onclick="bookTickets()">Book Tickets</button></div>
-                            
+                  </div>
+                  <div class="theater-conatiner" id="display-theater">
+                    <h5> Select the theater</h5>
+                    <div class=" container-fluid row" id="theater-list">
                     </div>
+                    <!-- <div class=" container-fluid row" id="selected-seats"></div>
+                    <div><button id="apply-modal-btn" type="button" class="btn-primary">Book Tickets</button></div> -->
+                        
+                </div>
 
-                    <div class="booked-ticket-cotainer" id="booked-ticket-cotainer">
-                        <h5> Here r ur tickets</h5>
-                        <div id="booked-ticket-content"></div>
-                            
+                <div class="seat-selection-cotainer" id="seat-selection-cotainer">
+                    <h5> Select you seat</h5>
+                    <div class=" container-fluid row" id="seats">
+                    </div>
+                    <div class=" container-fluid row" id="selected-seats"></div>
+                    <div><button id="apply-modal-btn" type="button" class="btn-primary" onclick="bookTickets()">Book Tickets</button></div>
+                        
+                </div>
+
+                <div class="booked-ticket-cotainer" id="booked-ticket-cotainer">
+                    <h5> Here r ur tickets</h5>
+                    <div id="booked-ticket-content"></div>
+                        
+                </div>
+              </div>
+              
+              <div id="CancelBooking" class="tabcontent">
+                <h3>cancel booking</h3>
+                <form id="CancelBookingFrom" name="CancelBookingFrom">
+                    <div class=" primary-color">
+                        <hr>
+                        <label for="name"><b>Booking Customer Name</b></label>
+                        <input type="text" placeholder="Enter full name" name="name" id="customer-name">
+                        <!-- <br><br>
+                        <label for="email"><b>Therater ID</b></label>
+                        <input type="text" placeholder="Enter Therater Id" name="email">
+                        <br><br>
+                        <label for="phone"><b>Movie ID</b></label>
+                        <input type="text" placeholder="Enter Movie Id" name="phone">
+                        <br><br>
+                        <label for="phone"><b>Seats to be cancelled Name</b></label>
+                        <input type="text" placeholder="Enter phone" name="phone"> -->
+
+                     
+                        <br><br>
+                        <div class="">
+                            <div id="error-msg" class="error-msg"></div>
+                            <button type="button" class="btn-primary" onclick="getBookingsForCustomer()">Get Bookings</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <booking list for use> -->
+   
+              </div>
+
+              <div id="ModifyBooking" class="tabcontent">
+                ModifyBooking
+
+              </div>
+                    
+</div>
+                </div>
+
+                    <div class="footer primary-color">
+                        <a href="mailto:email@jobhunt.com" class="primary-color">Contact Us</a>
                     </div>
 
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -59,7 +115,7 @@
         getjobVacancies()
         includeHTML();
     </script> -->
-    <script>showSeats()
+    <script>
     showAreaDropdownItems()</script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
