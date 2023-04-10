@@ -33,12 +33,13 @@ def display_nearby_theatres(nearby_theatres):
     print(f"{theatre['name']} ({theatre['address']}) - {theatre['distance']:.2f} km")
 
 # Main method to get nearby theatres based on current location in sorted order
-def main():
-    api_key = "your_api_key"
-    latitude, longitude = get_location()
-    theatres = search_theatres(api_key, latitude, longitude)
-    nearby_theatres = get_nearby_theatres(theatres, latitude, longitude)
-    display_nearby_theatres(nearby_theatres)
+# def main():
+#     api_key = "your_api_key"
+#     latitude, longitude = get_location()
+#     theatres = search_theatres(api_key, latitude, longitude)
+#     nearby_theatres = get_nearby_theatres(theatres, latitude, longitude)
+#     display_nearby_theatres(nearby_theatres)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+
