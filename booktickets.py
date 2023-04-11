@@ -46,26 +46,31 @@ def showSeats(theaterId,movieId):
 # return seats booked n available in theater
 
 
-def selectSeats( theraterId, movieId,seatRow, ColumnStart, numberOfSeats):
-    # if endof column in row is less tha startcolumn + number of seats donot allow selection
-    cursor = openDbConnection()
-    getTherterQuery = "SELECT [rowRange],[ColumnRange] FROM [movieDb].[dbo].[Theater] where [theaterId] = "+theraterId +";"
-    record = cursor.execute(getTherterQuery)
-    if(ColumnStart+numberOfSeats >  record[0][2]):
-        pass  
+# def selectSeats( theraterId, movieId,seatRow, ColumnStart, numberOfSeats):
+#     # if endof column in row is less tha startcolumn + number of seats donot allow selection
+#     cursor = openDbConnection()
+#     getTherterQuery = "SELECT [rowRange],[ColumnRange] FROM [movieDb].[dbo].[Theater] where [theaterId] = "+theraterId +";"
+#     record = cursor.execute(getTherterQuery)
+#     if(ColumnStart+numberOfSeats >  record[0][2]):
+#         pass  
     
 
 # retrun the seat in format row-column
 
 
-def bookTickets(theraterId, movieId,seats, customerName, customerAge ):
+def bookTickets(customerName, customerAge ,theraterId, movieId,seats  ):
     # if endof column in row is less tha startcolumn + number of seats donot allow selection
     cursor = openDbConnection()
-    # bookTicketsQuery = "INSERT INTO [dbo].[Booking] ([theraterId],[movieId],[seatBooked],[customerName]) VALUES("+theraterId +","+ movieId+",'"+seats+"','"+customerName+"');"
-    bookTicketsQuery = "INSERT INTO [movieDb].[dbo].[Booking] ([theraterId],[movieId],[seatBooked],[customerName]) VALUES(?,?,?,?);"
-    print(bookTicketsQuery)
-    cursor.execute(bookTicketsQuery, theraterId , movieId, seats,customerName)
-    cursor.commit()
+    movieQuery = "SELECT [movieId],[movieName],[ageConstraint] FROM [movieDb].[dbo].[Movie] WHERE [movieId]= "+movieId+";"
+    record = cursor.execute(movieQuery).fetchall()
+    if(customerAge >=record[0][2]):
+        bookTicketsQuery = "INSERT INTO [movieDb].[dbo].[Booking] ([theraterId],[movieId],[seatBooked],[customerName]) VALUES(?,?,?,?);"
+        print(bookTicketsQuery)
+        cursor.execute(bookTicketsQuery, theraterId , movieId, seats,customerName)
+        cursor.commit()
+    else: return {'rows':[],'msg':'Your booking is unsuccessful due to age constraint'}
+        
+    
     
 # RETURN BOOKED TICKET with customer name tehater name movie name seats
 

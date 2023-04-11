@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask_mysqldb import MySQL
 from flask_cors import CORS
-from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBooking, cancelUserBooking,updateCustomerName,showSeats
+from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBooking, cancelUserBooking,updateCustomerName,showSeats, bookTickets
 # from movieshows import  getTheaters
 from movietheaters import getAreas
 # from movietheaters import getSeatsForMovie
@@ -53,6 +53,9 @@ def  cancelBooking(bookingId):
 def  updateBooking(bookingId,newCustomerName):
     return updateCustomerName(bookingId,newCustomerName)
 
+@app.route('/bookTickets/<customerName>/<customerAge>/<theaterId>/<movieId>/<selectedSeats>', methods=['GET'])
+def  confirmBooking(customerName,customerAge,theaterId,movieId,selectedSeats):
+    return bookTickets(customerName,customerAge,theaterId,movieId,selectedSeats)
 
 if __name__ == "__main__":
  app.run(host='0.0.0.0',port='8080')
