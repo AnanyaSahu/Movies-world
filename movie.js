@@ -1,15 +1,11 @@
-// import * from "./"
-
 const selectSeatsList = new Set();
 const prefix = 'http://127.0.0.1:8080'
 let bookingIdForCustomer = ''
 let selectedTheater = ''
 let selectedMovie = ''
 let selectedSeatsCustomer = ''
-// var selectedSeatString = "sk"
 
-
-
+// Took this from https://www.w3schools.com/howto/howto_js_tabs.asp 
 function openTab(evt, TabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -24,6 +20,7 @@ function openTab(evt, TabName) {
     evt.currentTarget.className += " active";
   }
 
+//   Display seated on ui
 function showSeats(theaterId,movieId) {
     fetch(prefix+'/showSeats/'+theaterId+'/'+movieId, {
         method: 'GET',
@@ -31,7 +28,6 @@ function showSeats(theaterId,movieId) {
     }).then(response => response.json())
     .then((data) => {
         selectSeatsList.clear()
-        // obj = {'row': ['A', 'B'], 'column': ['1', '3'], 'seats': {'A-1': 'A', 'A-2': 'A', 'A-3': 'A', 'B-1': 'A', 'B-2': 'B', 'B-3': 'B'}}
         obj= data.rows
         var seats = document.getElementById("seats");
         ele = ""
@@ -42,20 +38,12 @@ function showSeats(theaterId,movieId) {
         }
         ele+="</div>"
         rowList = []
-        console.log(obj.row[0].charCodeAt())
-        console.log(obj.row[1].charCodeAt())
         for(i=obj.row[0].charCodeAt(); i<= obj.row[1].charCodeAt(); i++) {
             rowList.push(String.fromCharCode(i))
         }
-        console.log(rowList)
-        // while (rowItem)
         for (row in rowList) {
-        //    console.log(obj.row)
             ele += "<div class=display-flex>"
         for (let i = 0; i < parseInt(obj.column[1]); i++) {
-            // if(obj.seats)
-            // cssClass=
-            
             if(i==0){
                 ele += "<div>"+rowList[row]+"</div>"
             }
@@ -68,20 +56,14 @@ function showSeats(theaterId,movieId) {
             } else {
                 ele += "<div id=' "+String(row).concat(i+1)+" 'class='seat-rows seat-booked'><i class='fa-solid fa-couch'></i></div>"
             }
-            // console.log(obj.seats[seat] == 'A') 
-            
          }
          ele+="</div><br>"
         }
-    
-        // <div>selected seats: </div>
-    
         seats.innerHTML = ele
 })   
-
-
 }
 
+// select seats for user
 function selectSeats(selectedRow, selectedColumn) {
     let createSeatString =String.fromCharCode('A'.charCodeAt() + selectedRow) +"-"+selectedColumn
     if(selectSeatsList.has(createSeatString)){
@@ -93,6 +75,7 @@ function selectSeats(selectedRow, selectedColumn) {
     showselectedseats()
 }
 
+// display selected seats for user
 function showselectedseats(){
     var selectedSeats = document.getElementById("selected-seats");
     const myIterator = selectSeatsList.values();
@@ -106,17 +89,14 @@ function showselectedseats(){
     selectedSeats.innerHTML = ele
 }
 
-
+// populate area in dropdown
 function showAreaDropdownItems() {
-    // let areaTableDetails = [[ '101', 'Pranell Street', '100'],[ '102', 'Prince Street', '200']]
     var arealist = document.getElementById("area-list");
     ele =''
     fetch(prefix+'/getAreaList/', {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
-        // console.log('areaarearaearae') 
-        // console.log(data.rows)  
         for (row in data.rows) {
             r = data.rows[row]
             ele+=" <div class='cursor-pointer' onclick='selectArea("+ r[0]+")'>"+ r[0]+","+ r[1]+"</div>"
@@ -125,15 +105,14 @@ function showAreaDropdownItems() {
 })   
 }
 
+// select area from dropdown
 function selectArea(areaCode) {
-    //get all theaters sort by area code --> theratersTableDetails
-
-    var theaterConatiner = document.getElementById("display-theater");
+var theaterConatiner = document.getElementById("display-theater");
     theaterConatiner.style.display = 'block'
     showTheaters(areaCode)
 }
 
-
+// select theater on ui
 function showTheaters(area) {
     ele =''
     var arealist = document.getElementById("theater-list");
@@ -141,8 +120,6 @@ function showTheaters(area) {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
-        // console.log('get therater') 
-        // console.log(data.rows)  
         for (row in data.rows) {
             r = data.rows[row]
             ele+=" <div class='cursor-pointer' onclick='selectTheater("+ r[1]+")'>"+ r[0]+","+ r[1]+"</div>"
@@ -151,20 +128,17 @@ function showTheaters(area) {
 })   
 }
 
+// select theater from the list
 function selectTheater(theaterId) {
     selectedTheater = theaterId
     var movieConatiner = document.getElementById("display-movie");
     var movieListContainer = document.getElementById("movie-list");
     var ele =''
     movieConatiner.style.display = 'block'
-    // let movieTableDetails = [['101', '101','111','movie name', 'showtiming', 'duration', 11]]
-
     fetch(prefix+'/getMovieList/'+theaterId, {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
-        console.log('get movies') 
-        console.log(data.rows)  
         for (row in data.rows) {
             r = data.rows[row]
             ele+=" <div class='cursor-pointer' onclick='selectMovie("+ r[1]+","+r[2]+")'>"+ r[2]+","+ r[3]+"</div>"
@@ -173,6 +147,7 @@ function selectTheater(theaterId) {
 }) 
 }
 
+// select movie from the list
 function selectMovie(theaterId, movieId ) {
     selectedMovie = movieId
     var theaterSeatConatiner = document.getElementById("seat-selection-cotainer");
@@ -180,7 +155,7 @@ function selectMovie(theaterId, movieId ) {
     showSeats(theaterId, movieId)
 }
 
-
+// book tickets for user
 function bookTickets( ) {
     customerName =document.forms["bookingFrom"]["booking-customer-name"].value;
     customerAge =document.forms["bookingFrom"]["age"].value;
@@ -191,20 +166,15 @@ function bookTickets( ) {
         if(data.rows.length > 0){
             var bookedTicketCotainer = document.getElementById("booked-ticket-cotainer");
             bookedTicketCotainer.style.display = 'block'
-            // console.log('booking id')
-            // console.log(data.rows[0][0])
             showBookedSeats(data.rows[0][0])
         } else {
             console.log(data.msg)
         }
 }) 
-
 }
 
-
+//show book tickets for user
 function showBookedSeats(bookingIdForCustomer) {
-            // var newCustomerName =  document.forms["CancelBookingFrom"]["new-name"].value;
-        console.log(bookingIdForCustomer)
         fetch(prefix+'/getTicket/'+bookingIdForCustomer, {
             method: 'GET',
            
@@ -212,26 +182,19 @@ function showBookedSeats(bookingIdForCustomer) {
         .then((data) => {
             var getTicketCotainer = document.getElementById("booked-ticket-content");
             getTicketCotainer.style.display = 'block'
-                // // console.log('show tickets id')
-                // console.log(data.rows[0])
                 customerName= data.rows[0][2]
                 theaterName = data.rows[0][0]
                 movieName = data.rows[0][3]
                 movieTime = data.rows[0][4]
                 seats= data.rows[0][5]
                 ele =''
-
                 ele += "<div class='' id='customer-name'>"+ customerName+"</div>"
                 ele += "<div class='' id='theater-name'>"+ theaterName+"</div>"
                 ele += "<div class='' id='movie-name'>"+ movieName+"</div>"
                 ele += "<div class='' id='movie-time'>"+ movieTime+"</div>"
                 ele += "<div class='' id='seat-selected'>"+ seats+"</div>"
-
                 ele += "<div><button id='ply-modal-btn' type='button' class='btn-primary' onclick='downlaodTickets()>Downlaod Tickets</button></div>"
-                     
                 getTicketCotainer.innerHTML = ele
-
-    
     }) 
 
 }
@@ -240,6 +203,7 @@ function downlaodTickets() {
 
 }
 
+//get bookings for customer
 function getBookingsForCustomer(){
     var name =  document.forms["CancelBookingFrom"]["name"].value;
     var userbooking = document.getElementById("user-booking");
@@ -254,10 +218,8 @@ function getBookingsForCustomer(){
     })
         .then(response => response.json())
         .then((data) => {
-            console.log(data.rows)  
             for (var i in  data.rows) {
                 b = data.rows[i]
-                console.log(b)
                 ele += "<div class='display-flex' onclick='selectBookingForUser("+b[0]+")'>"
                 ele += "<div class='' id='customer-name'>"+ b[0]+"</div>;&nbsp;"
                 ele += "<div class='' id='theater-name'>"+   b[1]+"</div>;&nbsp;"
@@ -270,12 +232,11 @@ function getBookingsForCustomer(){
                 ele += "</div>"
                 ele += "<br>"
             }
-            userbooking.innerHTML = ele
-            
-            
+            userbooking.innerHTML = ele  
     })
     } 
 
+//select bookings for customer
     function selectBookingForUser(bookingId) {
             var cancelbooking = document.getElementById("cancel-booking");
             cancelbooking.style.display = 'block'
@@ -285,17 +246,12 @@ function getBookingsForCustomer(){
     }
 
 
-
+//cancel bookings for customer
     function cancelBookingForUser() {
-
-        console.log(bookingIdForCustomer)
-
         fetch(prefix+'/cancelTickets/'+bookingIdForCustomer, {
             method: 'GET',
         })
             .then(response => {
-            console.log('cancelBookingForUser')
-            console.log(response)
             alert('Your booking has been cancelled')
         })
     }
@@ -304,16 +260,12 @@ function getBookingsForCustomer(){
         modifyBookingForm.style.display = 'block'
     }
 
+    //modify bookings for customer
     function modifyBookingForUser(){
         var newCustomerName =  document.forms["CancelBookingFrom"]["new-name"].value;
-        console.log(bookingIdForCustomer)
         fetch(prefix+'/updateTickets/'+bookingIdForCustomer+'/'+newCustomerName, {
             method: 'GET',
-           
-        })
-            .then(response => {
-            console.log('modifyBookingForUser')
-            console.log(response)
+        }).then(response => {
             alert('Your booking has been modified')
         })
     }
