@@ -44,6 +44,7 @@ background-color: red;
 /* show seats of movie theater end  */
 
 /* dropdown css for area dropdown start  */
+/* Took from https://www.w3schools.com/css/css_dropdowns.asp and modified */
 .dropbtn {
     background-color: red;
     color: white;
@@ -163,10 +164,10 @@ background-color: red;
 }
 /* Css for footer end */
 
-/* Style the tab */
+/* Style the tab  start*/
+/* Took this from https://www.w3schools.com/howto/howto_js_tabs.asp and modified  */
 .tab {
   overflow: hidden;
-  /* border: 1px solid #ccc; */
   background-color: red;
 }
 
@@ -199,4 +200,4 @@ background-color: red;
   border: 1px solid ;
   border-top: none;
 }
-
+/* Style the tab end */
