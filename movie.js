@@ -3,6 +3,9 @@
 const selectSeatsList = new Set();
 const prefix = 'http://127.0.0.1:8080'
 let bookingIdForCustomer = ''
+let selectedTheater = ''
+let selectedMovie = ''
+let selectedSeatsCustomer = ''
 // var selectedSeatString = "sk"
 
 
@@ -98,21 +101,22 @@ function showselectedseats(){
         selectedSeatString += entry;
         selectedSeatString += ",";
     }
+    selectedSeatsCustomer = selectedSeatString
     ele = "<div class='display-flex cursor-pointer'> Selected Seats: &nbsp;"+selectedSeatString+"</div>"
     selectedSeats.innerHTML = ele
 }
 
 
 function showAreaDropdownItems() {
-    let areaTableDetails = [[ '101', 'Pranell Street', '100'],[ '102', 'Prince Street', '200']]
+    // let areaTableDetails = [[ '101', 'Pranell Street', '100'],[ '102', 'Prince Street', '200']]
     var arealist = document.getElementById("area-list");
     ele =''
     fetch(prefix+'/getAreaList/', {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
-        console.log('areaarearaearae') 
-        console.log(data.rows)  
+        // console.log('areaarearaearae') 
+        // console.log(data.rows)  
         for (row in data.rows) {
             r = data.rows[row]
             ele+=" <div class='cursor-pointer' onclick='selectArea("+ r[0]+")'>"+ r[0]+","+ r[1]+"</div>"
@@ -137,8 +141,8 @@ function showTheaters(area) {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
-        console.log('get therater') 
-        console.log(data.rows)  
+        // console.log('get therater') 
+        // console.log(data.rows)  
         for (row in data.rows) {
             r = data.rows[row]
             ele+=" <div class='cursor-pointer' onclick='selectTheater("+ r[1]+")'>"+ r[0]+","+ r[1]+"</div>"
@@ -148,11 +152,12 @@ function showTheaters(area) {
 }
 
 function selectTheater(theaterId) {
+    selectedTheater = theaterId
     var movieConatiner = document.getElementById("display-movie");
     var movieListContainer = document.getElementById("movie-list");
     var ele =''
     movieConatiner.style.display = 'block'
-    let movieTableDetails = [['101', '101','111','movie name', 'showtiming', 'duration', 11]]
+    // let movieTableDetails = [['101', '101','111','movie name', 'showtiming', 'duration', 11]]
 
     fetch(prefix+'/getMovieList/'+theaterId, {
         method: 'GET',
@@ -169,6 +174,7 @@ function selectTheater(theaterId) {
 }
 
 function selectMovie(theaterId, movieId ) {
+    selectedMovie = movieId
     var theaterSeatConatiner = document.getElementById("seat-selection-cotainer");
     theaterSeatConatiner.style.display = 'block'
     showSeats(theaterId, movieId)
@@ -176,44 +182,69 @@ function selectMovie(theaterId, movieId ) {
 
 
 function bookTickets( ) {
-    var bookedTicketCotainer = document.getElementById("booked-ticket-cotainer");
-    bookedTicketCotainer.style.display = 'block'
-    showBookedSeats()
+    customerName =document.forms["bookingFrom"]["booking-customer-name"].value;
+    customerAge =document.forms["bookingFrom"]["age"].value;
+    fetch(prefix+'/bookTickets/'+customerName+'/'+customerAge+'/'+selectedTheater+'/'+selectedMovie+'/'+selectedSeatsCustomer, {
+        method: 'GET',
+    }).then(response => response.json())
+    .then((data) => {
+        if(data.rows.length > 0){
+            var bookedTicketCotainer = document.getElementById("booked-ticket-cotainer");
+            bookedTicketCotainer.style.display = 'block'
+            // console.log('booking id')
+            // console.log(data.rows[0][0])
+            showBookedSeats(data.rows[0][0])
+        } else {
+            console.log(data.msg)
+        }
+}) 
+
 }
 
 
-function showBookedSeats( ) {
-    customerName= 'C101'
-    theaterName = 'Cine World'
-    movieName = "nike air"
-    movieTime = '1900'
-    seats= 'A-1,A-2'
-    ele =''
+function showBookedSeats(bookingIdForCustomer) {
+            // var newCustomerName =  document.forms["CancelBookingFrom"]["new-name"].value;
+        console.log(bookingIdForCustomer)
+        fetch(prefix+'/getTicket/'+bookingIdForCustomer, {
+            method: 'GET',
+           
+        }).then(response => response.json())
+        .then((data) => {
+            var getTicketCotainer = document.getElementById("booked-ticket-content");
+            getTicketCotainer.style.display = 'block'
+                // // console.log('show tickets id')
+                // console.log(data.rows[0])
+                customerName= data.rows[0][2]
+                theaterName = data.rows[0][0]
+                movieName = data.rows[0][3]
+                movieTime = data.rows[0][4]
+                seats= data.rows[0][5]
+                ele =''
 
-    // fetch(prefix+'/showBookedSeats/'+customerName+'/'+theaterName+'/'+movieName+'/'+, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Accept': 'application/json',
-    //     },
-    // })
-    //     .then(response => {response.json()
-    //     console.log(response)
-    // })
+                ele += "<div class='' id='customer-name'>"+ customerName+"</div>"
+                ele += "<div class='' id='theater-name'>"+ theaterName+"</div>"
+                ele += "<div class='' id='movie-name'>"+ movieName+"</div>"
+                ele += "<div class='' id='movie-time'>"+ movieTime+"</div>"
+                ele += "<div class='' id='seat-selected'>"+ seats+"</div>"
 
-    var theaterSeatConatiner = document.getElementById("booked-ticket-content");
- 
-    ele += "<div class='' id='customer-name'>"+ customerName+"</div>"
-    ele += "<div class='' id='theater-name'>"+ theaterName+"</div>"
-    ele += "<div class='' id='movie-name'>"+ movieName+"</div>"
-    ele += "<div class='' id='movie-time'>"+ movieTime+"</div>"
-    ele += "<div class='' id='seat-selected'>"+ seats+"</div>"
-    theaterSeatConatiner.innerHTML = ele
+                ele += "<div><button id='ply-modal-btn' type='button' class='btn-primary' onclick='downlaodTickets()>Downlaod Tickets</button></div>"
+                     
+                getTicketCotainer.innerHTML = ele
+
+    
+    }) 
+
+}
+
+function downlaodTickets() {
+
 }
 
 function getBookingsForCustomer(){
     var name =  document.forms["CancelBookingFrom"]["name"].value;
     var userbooking = document.getElementById("user-booking");
     userbooking.style.display = 'block'
+
     ele =''
     fetch(prefix+'/getBookingsForCustomer/'+name, {
         method: 'GET',
@@ -246,14 +277,11 @@ function getBookingsForCustomer(){
     } 
 
     function selectBookingForUser(bookingId) {
-        // if(bookingIdForCustomer != '') {
             var cancelbooking = document.getElementById("cancel-booking");
             cancelbooking.style.display = 'block'
-        // }
-
+            var modifyuserbooking = document.getElementById("modify-booking");
+            modifyuserbooking.style.display = 'block'
         bookingIdForCustomer =  bookingId
-
-   
     }
 
 
@@ -264,12 +292,16 @@ function getBookingsForCustomer(){
 
         fetch(prefix+'/cancelTickets/'+bookingIdForCustomer, {
             method: 'GET',
-           
         })
             .then(response => {
             console.log('cancelBookingForUser')
             console.log(response)
+            alert('Your booking has been cancelled')
         })
+    }
+    function showModifyBooking(){
+        var modifyBookingForm = document.getElementById("modifyBookingForm");
+        modifyBookingForm.style.display = 'block'
     }
 
     function modifyBookingForUser(){
@@ -282,8 +314,11 @@ function getBookingsForCustomer(){
             .then(response => {
             console.log('modifyBookingForUser')
             console.log(response)
+            alert('Your booking has been modified')
         })
     }
+
+
 
 
 
