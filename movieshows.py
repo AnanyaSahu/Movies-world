@@ -17,10 +17,10 @@ from database import openDbConnection
 
 def get_movies_by_theatre(theatreId):
     cursor = openDbConnection()
-    getMovieByTheaterQuery = "SELECT * FROM [movieDb].[dbo].[TheaterMovie] tm INNER JOIN [movieDb].[dbo].[Movie] m  on tm.movieId = m.movieId where tm.theaterId = "+ str(theatreId) 
+    getMovieByTheaterQuery = "SELECT tm.id, tm.theaterId ,tm.movieId, m.movieName, m.showTiming, m.duration, m.ageConstraint FROM [movieDb].[dbo].[TheaterMovie] tm INNER JOIN [movieDb].[dbo].[Movie] m  on tm.movieId = m.movieId where tm.theaterId = "+ str(theatreId) 
     print(getMovieByTheaterQuery)
-    record = cursor.execute(getMovieByTheaterQuery)
-    print(record.fetchall())
+    record = cursor.execute(getMovieByTheaterQuery).fetchall()
+    print(record)
     r= [tuple(row) for row in record]
     return {'rows': r}
     # c.execute("SELECT movie_title FROM movies WHERE theatre_name = ?", (theatre,))
@@ -38,5 +38,3 @@ def get_movies_by_theatre(theatreId):
 
 
 # get_movies_by_theatre(101)
-
-
