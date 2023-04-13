@@ -58,6 +58,8 @@ finally:
 
     url = 'file:///C:/Users/baran/OneDrive/Masa%C3%BCst%C3%BC/Python%20Project/bookingdetails.txt'
     response = requests.get(url)
+
     with open('bookingdetails.txt', 'w') as f:
         f.write(response.text)
+
     print('Text file downloaded.')
