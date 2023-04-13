@@ -62,12 +62,16 @@ def bookTickets(customerName, customerAge ,theraterId, movieId,seats  ):
     # if endof column in row is less tha startcolumn + number of seats donot allow selection
     cursor = openDbConnection()
     movieQuery = "SELECT [movieId],[movieName],[ageConstraint] FROM [movieDb].[dbo].[Movie] WHERE [movieId]= "+movieId+";"
+    getBookingQuery = "SELECT * FROM [movieDb].[dbo].[Booking] WHERE theraterId = " + theraterId+" AND movieId = "+movieId+" AND customerName = '" + customerName+"' AND seatBooked = '"+ seats+"';"
     record = cursor.execute(movieQuery).fetchall()
-    if(customerAge >=record[0][2]):
+    if(int(customerAge) >= record[0][2]):
         bookTicketsQuery = "INSERT INTO [movieDb].[dbo].[Booking] ([theraterId],[movieId],[seatBooked],[customerName]) VALUES(?,?,?,?);"
         print(bookTicketsQuery)
         cursor.execute(bookTicketsQuery, theraterId , movieId, seats,customerName)
         cursor.commit()
+        record = cursor.execute(getBookingQuery).fetchall()
+        r= [tuple(row) for row in record]
+        return {'rows': r}
     else: return {'rows':[],'msg':'Your booking is unsuccessful due to age constraint'}
         
     

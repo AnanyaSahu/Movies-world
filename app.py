@@ -8,6 +8,7 @@ from movietheaters import getAreas
 # from movietheaters import getSeatsForMovie
 from movietheaters import get_nearby_theaters
 from movieshows import get_movies_by_theatre
+from gettickets import createTicket
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -56,6 +57,15 @@ def  updateBooking(bookingId,newCustomerName):
 @app.route('/bookTickets/<customerName>/<customerAge>/<theaterId>/<movieId>/<selectedSeats>', methods=['GET'])
 def  confirmBooking(customerName,customerAge,theaterId,movieId,selectedSeats):
     return bookTickets(customerName,customerAge,theaterId,movieId,selectedSeats)
+
+
+@app.route('/getTicket/<bookingId>', methods=['GET'])
+def  getMovieTickets(bookingId):
+    return createTicket(bookingId)
+
+# @app.route('/downloadTickets/<bookingId>', methods=['GET'])
+# def  downlaodMovieTickets(bookingId):
+#     return createTicket(bookingId)
 
 if __name__ == "__main__":
  app.run(host='0.0.0.0',port='8080')

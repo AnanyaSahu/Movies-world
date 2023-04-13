@@ -1,5 +1,8 @@
 /* show seats of movie theater start  */
-
+.body-scroll{
+overflow-y: scroll;
+margin-bottom: 100px;
+}
 .seat-rows{
 margin: 7px;
 }
@@ -100,6 +103,18 @@ background-color: red;
     display: none;
   }
 
+  .booked-ticket-content{
+    display: none;
+  }
+
+  .modifyBookingForm{
+    display: none;
+  }
+
+  .modify-booking{
+    display: none;
+  }
+
   .movie-conatiner{
     display: none;
   }
@@ -184,3 +199,4 @@ background-color: red;
   border: 1px solid ;
   border-top: none;
 }
+

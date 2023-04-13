@@ -1,0 +1,8 @@
+The booking details for booking ID 139 are:
+Theater Name: World of Movies
+Theater Area: George Street
+Customer Name: Ananya
+Movie Name: Pearl
+Show Timing: 1930
+Booked Seats: D-2,
+
