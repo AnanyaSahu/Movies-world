@@ -55,3 +55,9 @@ finally:
             f.write("Show Timing: {}\n".format(show_timing))
             f.write("Booked Seats: {}\n".format(seat_booked))
             f.write("\n")
+
+    url = 'file:///C:/Users/baran/OneDrive/Masa%C3%BCst%C3%BC/Python%20Project/bookingdetails.txt'
+    response = requests.get(url)
+    with open('bookingdetails.txt', 'w') as f:
+        f.write(response.text)
+    print('Text file downloaded.')
