@@ -8,9 +8,9 @@ global cursor
 def openDbConnection():
     try:
         dbConnection = pyodbc.connect('Driver={SQL Server};'
-                      'Server=ANNA\MSSQLSERVER03;'
-                      'Database=Travel DB;'
-                      'Trusted_Connection=yes;')
+                                      'Server=ANNA\MSSQLSERVER03;'
+                                      'Database=Travel DB;'
+                                      'Trusted_Connection=yes;')
 
         if dbConnection.getinfo != None:
             cursor = dbConnection.cursor()
@@ -20,8 +20,10 @@ def openDbConnection():
         print("Error while connecting to DB", e)
 
 # close datbase connection
+
+
 def closeDbConnection():
-        if dbConnection.getinfo != None:
-            cursor.close()
-            dbConnection.close()
-            print("db connection closed")
+    if dbConnection.getinfo != None:
+        cursor.close()
+        dbConnection.close()
+        print("db connection closed")
