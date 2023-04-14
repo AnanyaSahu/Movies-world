@@ -1,0 +1,203 @@
+/* show seats of movie theater start  */
+.body-scroll{
+overflow-y: scroll;
+margin-bottom: 100px;
+}
+.seat-rows{
+margin: 7px;
+}
+
+.display-flex{
+    display: flex; 
+}
+
+.seat-available{
+color: grey;
+}
+
+.seat-booked{
+color: red
+}
+
+.primary-color{
+  color: white;
+background-color: red;
+}
+
+.primary-color-body{
+  background-color: black;
+  color: white;
+  }
+.clicked-seat{
+    color: grey;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+.card{
+  background-color: black;
+  color: white;
+  border: 4px;
+  border-color: grey;
+}
+/* show seats of movie theater end  */
+
+/* dropdown css for area dropdown start  */
+/* Took from https://www.w3schools.com/css/css_dropdowns.asp and modified */
+.dropbtn {
+    background-color: red;
+    color: white;
+    padding: 16px;
+    min-width: 160px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: red;
+  }
+
+  /* dropdown css for area dropdown end  */
+
+
+
+  .theater-conatiner{
+    display: none;
+  }
+
+
+  .seat-selection-cotainer{
+    display: none;
+  }
+
+  .booked-ticket-cotainer{
+    display: none;
+  }
+
+  .booked-ticket-content{
+    display: none;
+  }
+
+  .modifyBookingForm{
+    display: none;
+  }
+
+  .modify-booking{
+    display: none;
+  }
+
+  .movie-conatiner{
+    display: none;
+  }
+
+  .user-booings{
+    display: none;
+  }
+
+  .cancel-booking{
+    display: none;
+  }
+/* Css for header start */
+  .header {
+    position: sticky;
+    top: 0px;
+    min-height: 40px;
+    display: flex;
+    width: 100%;
+    align-content: center;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 15px;
+    margin-left: 15px;
+}
+
+.img-container {
+    height: 40px;
+    width: 100px;
+}
+/* Css for header start */
+
+
+/* Css for footer start */
+.footer {
+  position: fixed;
+  bottom: 0px;
+  min-height: 40px;
+  display: inline-grid;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+}
+/* Css for footer end */
+
+/* Style the tab  start*/
+/* Took this from https://www.w3schools.com/howto/howto_js_tabs.asp and modified  */
+.tab {
+  overflow: hidden;
+  background-color: red;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: red;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: red;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid ;
+  border-top: none;
+}
+/* Style the tab end */
