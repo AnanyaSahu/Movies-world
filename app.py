@@ -5,7 +5,7 @@ from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBook
 from movietheaters import getAreas
 from movietheaters import get_nearby_theaters
 from movieshows import get_movies_by_theatre
-from gettickets import createTicket
+from getTickets import createTicket
 
 mysql = MySQL()
 app = Flask(__name__)
