@@ -1,21 +1,14 @@
 from flask import Flask
 from flask_mysqldb import MySQL
 from flask_cors import CORS
-from booktickets import getBookingsForCustomer as getBookingsForCustomerFromBooking, cancelUserBooking,updateCustomerName,showSeats, bookTickets
-from movietheaters import getAreas
-from movietheaters import get_nearby_theaters
-from movieshows import get_movies_by_theatre
-from getTickets import createTicket
+from booktickets import bookTicketsForCustomer
+from movietheaters import movieTheater
+from movieshows import  getMovieShow
+from getTickets import createTicketsForBookings
 
 mysql = MySQL()
 app = Flask(__name__)
 CORS(app)
-# # My SQL Instance configurations
-# # Change the HOST IP and Password to match your instance configurations
-# app.config['MYSQL_USER'] = 'web'
-# app.config['MYSQL_PASSWORD'] = 'webPass'
-# app.config['MYSQL_DB'] = 'student'
-# app.config['MYSQL_HOST'] = 'localhost' #for now
 mysql.init_app(app)
 
 
@@ -23,48 +16,57 @@ mysql.init_app(app)
 # This method will get booking deatails for a customer, input is customer name
 @app.route('/getBookingsForCustomer/<name>', methods=['GET'])
 def  getBookingsForCustomer(name):
-    return getBookingsForCustomerFromBooking(name)
+    b = bookTicketsForCustomer()
+    return b.getBookingsForCustomerFromBooking(name)
 
 # This method will list all the area
 @app.route('/getAreaList/', methods=['GET'])
 def  getAreaList():
-    return getAreas()
+    mt = movieTheater()
+    return mt.getAreas()
     
 # This method will list all the theaters ans return a list of theaters ordered by the nearest to farthest area, input is areacode 
 @app.route('/getTheratersList/<area>', methods=['GET'])
 def  getListTheraters(area):
-    return get_nearby_theaters(area)
+    mt = movieTheater()
+    return mt.get_nearby_theaters(area)
 
 # This method will list all the movies for the selacted theater, input is theater id
 @app.route('/getMovieList/<theaterId>', methods=['GET'])
 def  getMovieist(theaterId):
-    return get_movies_by_theatre(theaterId)
+    m = getMovieShow()
+    return m.get_movies_by_theatre(theaterId)
 
 # This method will get all the seats for the selecetd movies and selacted theater, input is theater id and movie id
 @app.route('/showSeats/<theaterId>/<movieId>', methods=['GET'])
 def  showSeatsForMovie(theaterId,movieId):
-    return showSeats(theaterId,movieId)
+    b = bookTicketsForCustomer()    
+    return b.showSeats(theaterId,movieId)
 
 # This method will cancel the booking for the user, input is booking id
 @app.route('/cancelTickets/<bookingId>', methods=['GET'])
 def  cancelBooking(bookingId):
-    return cancelUserBooking(bookingId)
+    b = bookTicketsForCustomer()
+    return b.cancelUserBooking(bookingId)
 
 # This method will update the booking name for the user, input is booking id and new customer name
 @app.route('/updateTickets/<bookingId>/<newCustomerName>', methods=['GET'])
 def  updateBooking(bookingId,newCustomerName):
-    return updateCustomerName(bookingId,newCustomerName)
+    b = bookTicketsForCustomer()
+    return b.updateCustomerName(bookingId,newCustomerName)
 
 # This method will  book the tickets for the user, input is customerName, customerAge, theaterId, movieId selectedSeats
 @app.route('/bookTickets/<customerName>/<customerAge>/<theaterId>/<movieId>/<selectedSeats>', methods=['GET'])
 def  confirmBooking(customerName,customerAge,theaterId,movieId,selectedSeats):
-    return bookTickets(customerName,customerAge,theaterId,movieId,selectedSeats)
+    b = bookTicketsForCustomer()    
+    return b.bookTickets(customerName,customerAge,theaterId,movieId,selectedSeats)
 
 
 # This method will get the tickets for the user, input is booking id
 @app.route('/getTicket/<bookingId>', methods=['GET'])
 def  getMovieTickets(bookingId):
-    return createTicket(bookingId)
+    c= createTicketsForBookings()
+    return c.createTicket(bookingId)
 
 
 if __name__ == "__main__":
