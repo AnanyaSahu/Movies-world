@@ -66,9 +66,6 @@ def  confirmBooking(customerName,customerAge,theaterId,movieId,selectedSeats):
 def  getMovieTickets(bookingId):
     return createTicket(bookingId)
 
-# @app.route('/downloadTickets/<bookingId>', methods=['GET'])
-# def  downlaodMovieTickets(bookingId):
-#     return createTicket(bookingId)
 
 if __name__ == "__main__":
  app.run(host='0.0.0.0',port='8080')

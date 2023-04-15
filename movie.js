@@ -217,9 +217,6 @@ function showBookedSeats(bookingIdForCustomer) {
 
 }
 
-function downlaodTickets() {
-
-}
 
 //get bookings for customer
 function getBookingsForCustomer(){
