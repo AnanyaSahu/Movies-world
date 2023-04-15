@@ -75,6 +75,7 @@ class bookTicketsForCustomer:
         d = databaseConnection()
         cursor = d.openDbConnection()
         updateCustomerNameQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = '"+ newCustomerName+"' WHERE [bookingID]= "+str(bookingID)
+
         cursor.execute(updateCustomerNameQuery)
         cursor.commit()
         return {'msg':'Your booking has been modified'}
