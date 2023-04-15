@@ -4,6 +4,7 @@ from unittest.mock import MagicMock, Mock
 from booktickets import bookTicketsForCustomer
 from getTickets import createTicketsForBookings
 from movietheaters import movieTheater
+from movieshows import getMovieShow
 from database import databaseConnection
 
 
