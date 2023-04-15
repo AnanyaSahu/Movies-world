@@ -2,6 +2,9 @@
 ## A platform that lets  you search theaters book and modify your bookings
 ### Business Requirements  and Scope of the System
 
+In this digital era more and more people are looking forward to completing their daily tasks online and reserving tickets for their favourite shows is no different. It's understandable why more and more individuals are choosing to purchase their movie tickets online given the comfort and ease that online ticket purchasing provides.
+The time when purchasing tickets required standing in line outside the theatre is left behind. Now people just have to go through the website and press a few buttons and voila movie tickets are booked. It’s quick, simple, and saves you a ton of time and work.
+
 [![Github Link](https://github.com/AnanyaSahu/Movies-world)](https://github.com/AnanyaSahu/Movies-world)
 
 [![Application Link](https://github.com/AnanyaSahu/Movies-world)])
