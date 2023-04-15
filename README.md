@@ -26,7 +26,10 @@ I was also in charge of developing the Frontend framework (HTML + JavaScript) an
 
 **Baran Azak (10636432)**
 
-**Divya ()**
+**Divya (10634832)**
+Contribution to the project: In the CA (two) assessment. I have contributed the section to show the user a list of nearby theatres based on location in sorted order. In this, I have created a function “get_theaters” which retrieves data from a database table named “Area”. It first establishes a database connection using the ‘openDbconnection()’ and assigns the resulting connection to a variable named cursor.
+The function then creates an SQL query that selects all the records from the "Area" table and assigns it to a variable called getAreaQuery. The query is executed using the execute() method of the cursor object and the results are fetched using the fetchall() method and assigned to a variable called record.
+The function converts the results into a list of tuples using a list comprehension and assigns the resulting list to a variable called r. Finally, the function returns a dictionary object with a single key-value pair where the key is "rows" and the value is the list of tuples r.
 
 **Sneha ()**
 
