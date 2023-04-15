@@ -60,7 +60,9 @@ function showSeats(theaterId,movieId) {
          ele+="</div><br>"
         }
         seats.innerHTML = ele
-})   
+}).catch( err => {
+    alert('unable to fetch seats details')
+  }) 
 }
 
 // select seats for user
@@ -102,7 +104,9 @@ function showAreaDropdownItems() {
             ele+=" <div class='cursor-pointer' onclick='selectArea("+ r[0]+")'>"+ r[0]+","+ r[1]+"</div>"
         }
         arealist.innerHTML = ele  
-})   
+}).catch( err => {
+    alert('unable to fetch area details')
+  })
 }
 
 // select area from dropdown
@@ -125,7 +129,9 @@ function showTheaters(area) {
             ele+=" <div class='cursor-pointer' onclick='selectTheater("+ r[1]+")'>"+ r[0]+","+ r[1]+"</div>"
         }
         arealist.innerHTML = ele  
-})   
+}).catch( err => {
+    alert('unable to fetch theater details')
+  })  
 }
 
 // select theater from the list
@@ -144,7 +150,9 @@ function selectTheater(theaterId) {
             ele+=" <div class='cursor-pointer' onclick='selectMovie("+ r[1]+","+r[2]+")'>"+ r[2]+","+ r[3]+"</div>"
         }
         movieListContainer.innerHTML = ele  
-}) 
+}).catch( err => {
+    alert('unable to fetch movie details')
+  })
 }
 
 // select movie from the list
@@ -170,16 +178,22 @@ function bookTickets( ) {
         } else {
             console.log(data.msg)
         }
-}) 
+}).catch( err => {
+    alert('unable to book your  details')
+  })
 }
 
 //show book tickets for user
 function showBookedSeats(bookingIdForCustomer) {
+    console.log('get tickets')
+    console.log(bookingIdForCustomer)
+    ele =''
         fetch(prefix+'/getTicket/'+bookingIdForCustomer, {
             method: 'GET',
            
         }).then(response => response.json())
         .then((data) => {
+            console.log(data)
             var getTicketCotainer = document.getElementById("booked-ticket-content");
             getTicketCotainer.style.display = 'block'
                 customerName= data.rows[0][2]
@@ -187,15 +201,19 @@ function showBookedSeats(bookingIdForCustomer) {
                 movieName = data.rows[0][3]
                 movieTime = data.rows[0][4]
                 seats= data.rows[0][5]
+                
+                console.log(getTicketCotainer)
                 ele =''
-                ele += "<div class='' id='customer-name'>"+ customerName+"</div>"
+                ele += "<div class='' id='customer-name' >"+ customerName+"</div>"
                 ele += "<div class='' id='theater-name'>"+ theaterName+"</div>"
                 ele += "<div class='' id='movie-name'>"+ movieName+"</div>"
                 ele += "<div class='' id='movie-time'>"+ movieTime+"</div>"
                 ele += "<div class='' id='seat-selected'>"+ seats+"</div>"
-                ele += "<div><button id='ply-modal-btn' type='button' class='btn-primary' onclick='downlaodTickets()>Downlaod Tickets</button></div>"
+                // ele += "<div><button id='ply-modal-btn' type='button' class='btn-primary' onclick='downlaodTickets()>Downlaod Tickets</button></div>"
                 getTicketCotainer.innerHTML = ele
-    }) 
+    }).catch( err => {
+        alert('unable to fetch details')
+      })
 
 }
 
@@ -233,7 +251,12 @@ function getBookingsForCustomer(){
                 ele += "<br>"
             }
             userbooking.innerHTML = ele  
-    })
+            if(data.rows.length ==0) {
+                alert('No details found')
+            }
+    }).catch( err => {
+        alert('error fetching details')
+      })
     } 
 
 //select bookings for customer
@@ -253,7 +276,9 @@ function getBookingsForCustomer(){
         })
             .then(response => {
             alert('Your booking has been cancelled')
-        })
+        }).catch( err => {
+            alert('error cancelling your bookings')
+          })
     }
     function showModifyBooking(){
         var modifyBookingForm = document.getElementById("modifyBookingForm");
@@ -267,7 +292,9 @@ function getBookingsForCustomer(){
             method: 'GET',
         }).then(response => {
             alert('Your booking has been modified')
-        })
+        }).catch( err => {
+            alert('error modifying your bookings')
+          })
     }
 
 
