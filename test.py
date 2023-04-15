@@ -2,6 +2,8 @@ import unittest
 from unittest.mock import MagicMock, Mock
 
 from booktickets import bookTicketsForCustomer
+from movieshows import getMovieShow
+from movietheaters import movieTheater
 from database import databaseConnection
 
 
@@ -32,6 +34,23 @@ class TestStringMethods(unittest.TestCase):
        b = bookTicketsForCustomer()
        result = b.cancelUserBooking(123)
        self.assertEqual(result['msg'], 'Your booking has been cancelled')
+
+    def test_getAreas(self):
+       cursor= Mock()
+       db = databaseConnection()
+       db.openDbConnection = MagicMock(return_value=cursor)
+       s = movieTheater()
+       result = s.getAreas()
+       self.assertGreaterEqual(len(result['rows']), 0)
+
+
+    def test_get_nearby_theaters(self):
+       cursor= Mock()
+       db = databaseConnection()
+       db.openDbConnection = MagicMock(return_value=cursor)
+       s = movieTheater()
+       result = s.get_nearby_theaters(100)
+       self.assertGreaterEqual(len(result['rows']), 0)
 
 
 if __name__ == '__main__':
