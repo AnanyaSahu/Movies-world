@@ -56,7 +56,7 @@ class bookTicketsForCustomer:
     def cancelUserBooking( self,bookingId):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [bookingId]= "+bookingId
+        cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [bookingId]= "+str(bookingId)
         cursor.execute(cancelBookingQuery)
         cursor.commit()
         return {'msg':'Your booking has been cancelled'}
@@ -74,7 +74,7 @@ class bookTicketsForCustomer:
     def updateCustomerName(self,bookingID, newCustomerName):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        updateCustomerNameQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = '"+ newCustomerName+"' WHERE [bookingID]= "+bookingID
+        updateCustomerNameQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = '"+ newCustomerName+"' WHERE [bookingID]= "+str(bookingID)
         cursor.execute(updateCustomerNameQuery)
         cursor.commit()
         return {'msg':'Your booking has been modified'}
