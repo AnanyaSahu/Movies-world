@@ -68,6 +68,11 @@ def  getMovieTickets(bookingId):
     c= createTicketsForBookings()
     return c.createTicket(bookingId)
 
+# This method will get the tickets for the user, input is booking id
+@app.route('/', methods=['GET'])
+def  landPage():
+    mt = movieTheater()
+    return mt.getAreas()
 
 if __name__ == "__main__":
  app.run(host='0.0.0.0',port='8080', ssl_context=('../cert.pem', '../privkey.pem'))
