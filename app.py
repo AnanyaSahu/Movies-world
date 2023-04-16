@@ -6,10 +6,10 @@ from movietheaters import movieTheater
 from movieshows import  getMovieShow
 from getTickets import createTicketsForBookings
 
-mysql = MySQL()
+# mysql = MySQL()
 app = Flask(__name__)
-CORS(app)
-mysql.init_app(app)
+# CORS(app)
+# mysql.init_app(app)
 
 
 
