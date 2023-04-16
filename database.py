@@ -13,7 +13,7 @@ class databaseConnection:
     def openDbConnection(self):
         try:
             dbConnection = connection = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-            'Server=Server=sqlpython.centralindia.cloudapp.azure.com;'
+            'Server=sqlpython.centralindia.cloudapp.azure.com;'
             'Database=master;'
             'encrypt=yes;'
             'TrustServerCertificate=yes;'
@@ -22,7 +22,7 @@ class databaseConnection:
             connection.close()
 
             dbConnection=connection = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-            'Server=Server=sqlpython.centralindia.cloudapp.azure.com;'
+            'Server=sqlpython.centralindia.cloudapp.azure.com;'
             'Database=MoviesWorld;'
             'encrypt=yes;'
             'TrustServerCertificate=yes;'
