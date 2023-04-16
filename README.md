@@ -20,7 +20,7 @@ The time when purchasing tickets required standing in line outside the theatre i
 8)	Modify Ticket: The app should allow users to modify their ticket details and can update their names.
 
 
-**NOTE:** We have added testsin test.py file for all the core business logic.
+**NOTE:** We have added testing test.py file for all the core business logic.
 
 [![Github Link](https://github.com/AnanyaSahu/Movies-world)](https://github.com/AnanyaSahu/Movies-world)
 
