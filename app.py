@@ -72,7 +72,9 @@ def  getMovieTickets(bookingId):
 @app.route('/')
 def  landPage():
     mt = movieTheater()
-    return mt.getAreas()
+    #return mt.getAreas()
+    page = 'index.html'
+    return render_template('index.html', src=page)
 
 if __name__ == "__main__":
  app.run(host='0.0.0.0',port='8080', ssl_context=('../cert.pem', '../privkey.pem'))
