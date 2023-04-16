@@ -55,9 +55,9 @@ In our project, I have contributed to the part of retrieving a list of movies th
 
 ## Attributions 
 
-Movie.js (lines 9-21)-> https://www.w3schools.com/howto/howto_js_tabs.asp 
-index.html (lines 26-33) –>  https://www.w3schools.com/howto/howto_js_tabs.asp 
-global.css (lines 47-83) -> https://www.w3schools.com/css/css_dropdowns.asp
-global.css (lines 169 -202) -> https://www.w3schools.com/howto/howto_js_tabs.asp
+- Movie.js (lines 9-21)-> https://www.w3schools.com/howto/howto_js_tabs.asp 
+- index.html (lines 26-33) –>  https://www.w3schools.com/howto/howto_js_tabs.asp 
+- global.css (lines 47-83) -> https://www.w3schools.com/css/css_dropdowns.asp
+- global.css (lines 169 -202) -> https://www.w3schools.com/howto/howto_js_tabs.asp
 
 
