@@ -17,7 +17,7 @@ mysql.init_app(app)
 @app.route('/getBookingsForCustomer/<name>', methods=['GET'])
 def  getBookingsForCustomer(name):
     b = bookTicketsForCustomer()
-    return b.getBookingsForCustomerFromBooking(name)
+    return b.getBookingsForCustomer(name)
 
 # This method will list all the area
 @app.route('/getAreaList/', methods=['GET'])

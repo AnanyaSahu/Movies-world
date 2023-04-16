@@ -9,9 +9,7 @@ class movieTheater:
         cursor = d.openDbConnection()
         getAreaQuery = "SELECT *FROM  [movieDb].[dbo].[Area];" 
         record = cursor.execute(getAreaQuery).fetchall()
-        print(record)
         r= [tuple(row) for row in record]
-        print(r)
         return {'rows': r}
 
 
@@ -20,9 +18,7 @@ class movieTheater:
         d = databaseConnection()
         cursor = d.openDbConnection()
         getNearByTheaterQuery = "SELECT t.thearerName, t.theaterId, a.areaId, a.areaName, abs(a.location-"+str(area)+"), t.rowRange, t.ColumnRange FROM [movieDb].[dbo].[Theater] t Inner join [movieDb].[dbo].Area a ON t.areaId = a.areaId group by t.thearerName, t.theaterId, a.areaId, a.areaName,abs(a.location-"+str(area)+"), t.rowRange, t.ColumnRange  order by abs(a.location-"+str(area)+");" 
-        print(getNearByTheaterQuery)
         record = cursor.execute(getNearByTheaterQuery).fetchall()
         r= [tuple(row) for row in record]
-        print(r)
         return {'rows': r}
 

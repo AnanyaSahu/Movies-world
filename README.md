@@ -50,3 +50,12 @@ The function converts the results into a list of tuples using a list comprehensi
 **Sneha (10631640)**
 In our project, I have contributed to the part of retrieving a list of movies that are currently playing at a given theatre. For this, I have defined a function “get_movies_by_theatre”. It takes a ‘theatreId’ parameter as input and returns a dictionary object containing the query results. This function uses an SQL query to retrieve the list of movies from a database. It first opens a database connection using the openDbConnection function and then executes a SQL query that joins the TheaterMovie and Movie tables to obtain the movie information for the given theatre. The function then formats the query results into a dictionary object and returns it. I have tested the get_movies_by_theatre function by using the unittest class ‘TestGetMoviesByTheatre’. It defines two test methods: The test_get_movies_for_valid_theatre_id method tests the function's behaviour when a valid theatreId is provided as input. The test verifies that the function returns the expected dictionary object and that the SQL query executed by the function matches the expected query. The test_get_movies_for_invalid_theatre_id method tests the function's behaviour when an invalid theatreId is provided as input. The test verifies that the function returns an empty dictionary object and that the SQL query executed by the function matches the expected query for the invalid theatreId.
 
+
+## Attributions 
+
+Movie.js (lines 9-21)-> https://www.w3schools.com/howto/howto_js_tabs.asp 
+index.html (lines 26-33) –>  https://www.w3schools.com/howto/howto_js_tabs.asp 
+global.css (lines 47-83) -> https://www.w3schools.com/css/css_dropdowns.asp
+global.css (lines 169 -202) -> https://www.w3schools.com/howto/howto_js_tabs.asp
+
+
