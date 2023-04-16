@@ -1,6 +1,6 @@
 from flask import Flask
-#from flask_mysqldb import MySQL
-#from flask_cors import CORS
+# from flask_mysqldb import MySQL
+# from flask_cors import CORS
 from booktickets import bookTicketsForCustomer
 from movietheaters import movieTheater
 from movieshows import  getMovieShow
@@ -44,19 +44,19 @@ def  showSeatsForMovie(theaterId,movieId):
     return b.showSeats(theaterId,movieId)
 
 # This method will cancel the booking for the user, input is booking id
-@app.route('/cancelTickets/<bookingId>', methods=['GET'])
+@app.route('/cancelTickets/<bookingId>', methods=['DELETE'])
 def  cancelBooking(bookingId):
     b = bookTicketsForCustomer()
     return b.cancelUserBooking(bookingId)
 
 # This method will update the booking name for the user, input is booking id and new customer name
-@app.route('/updateTickets/<bookingId>/<newCustomerName>', methods=['GET'])
+@app.route('/updateTickets/<bookingId>/<newCustomerName>', methods=['POST'])
 def  updateBooking(bookingId,newCustomerName):
     b = bookTicketsForCustomer()
     return b.updateCustomerName(bookingId,newCustomerName)
 
 # This method will  book the tickets for the user, input is customerName, customerAge, theaterId, movieId selectedSeats
-@app.route('/bookTickets/<customerName>/<customerAge>/<theaterId>/<movieId>/<selectedSeats>', methods=['GET'])
+@app.route('/bookTickets/<customerName>/<customerAge>/<theaterId>/<movieId>/<selectedSeats>', methods=['POST'])
 def  confirmBooking(customerName,customerAge,theaterId,movieId,selectedSeats):
     b = bookTicketsForCustomer()    
     return b.bookTickets(customerName,customerAge,theaterId,movieId,selectedSeats)
@@ -70,4 +70,4 @@ def  getMovieTickets(bookingId):
 
 
 if __name__ == "__main__":
- app.run(host='0.0.0.0',port='8080')
+ app.run(host='0.0.0.0',port='8080', ssl_context=('../cert.pem', '../privkey.pem'))
