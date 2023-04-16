@@ -5,13 +5,25 @@
 In this digital era more and more people are looking forward to completing their daily tasks online and reserving tickets for their favourite shows is no different. It's understandable why more and more individuals are choosing to purchase their movie tickets online given the comfort and ease that online ticket purchasing provides.
 The time when purchasing tickets required standing in line outside the theatre is left behind. Now people just have to go through the website and press a few buttons and voila movie tickets are booked. It’s quick, simple, and saves you a ton of time and work.
 
+1)	Area Selection: It allows users to select their preferred area. This feature will provide users with more options and flexibility in choosing a theatre that meets their requirements.
+
+2)	Theater Selection: This requirement involves users selecting their preferred theatre based on the area location. The list of theatres will be displayed in sorted order based on the location they have selected. This feature will provide users with more options and flexibility in choosing a theatre that meets their requirements.
+
+3)	Movie Search: This requirement involves allowing users to view the movies that are currently playing in theatres. 
+
+4)	Seat Availability: This requirement involves displaying the availability of seats for the selected showtime in the selected theatre. Users should be able to view the seating chart and select their preferred seats based on availability. This feature will allow users to choose their preferred seats in advance and avoid any last-minute hassle.
+
+5)	Seat Selection: This requirement allows users to select their preferred theatre seats. The app should display a seating chart, and users should be able to select seats based on their preferences.
+6)	Booking Confirmation: Once the booking is complete, the app should display the booking confirmation details, including movie details, seat numbers, and show timings. This feature will provide users with confirmation of their booking and all the necessary details related to their booking.
+7)	Ticket Cancellation: The app should allow users to cancel their tickets if they are unable to attend the movie. 
+
+8)	Modify Ticket: The app should allow users to modify their ticket details and can update their names.
+
+
 [![Github Link](https://github.com/AnanyaSahu/Movies-world)](https://github.com/AnanyaSahu/Movies-world)
 
-[![Application Link](https://github.com/AnanyaSahu/Movies-world)])
 
 ## Tech
-
-Dillinger uses a number of open source projects to work properly:
 
 - [Javascript] - HTML enhanced for web apps!
 - [Python] - Backend system is devloped in python
@@ -28,6 +40,7 @@ My contribution was to create a book tickets module, where the user could choose
 I was also in charge of developing the Frontend framework (HTML + JavaScript) and creating APIs to interact between the Frontend framework and the backend (Python). I've also built up VMs on Azure for our application and a cloud database. My work also included combining the team's efforts in terms of module integration.
 
 **Baran Azak (10636432)**
+My task in our project was to create a get-ticket page and fetch the movie booking for a particular booking ID from Movie Database, I set the important details for the ticket such as theater name, theater area, customer name, etc. By using particular “booking_id”, I gathered all the details about ticket and created a file that will contain all details about ticket and saved this file as “bookingdetails.txt”. Also created a method for the user to download this txt file by using URL. Finally, we have fixed the parts of the project that are not working properly and added things that need to be added.
 
 **Divya (10634832)**
 Contribution to the project: In the CA (two) assessment. I have contributed the section to show the user a list of nearby theatres based on location in sorted order. In this, I have created a function “get_theaters” which retrieves data from a database table named “Area”. It first establishes a database connection using the ‘openDbconnection()’ and assigns the resulting connection to a variable named cursor.
