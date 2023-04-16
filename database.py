@@ -1,4 +1,5 @@
 import pyodbc
+import pypyodbc
 
 global dbConnection
 global cursor
@@ -11,10 +12,24 @@ class databaseConnection:
 # connect to database
     def openDbConnection(self):
         try:
-            dbConnection = pyodbc.connect('Driver={SQL Server};'
-                                        'Server=ANNA\MSSQLSERVER03;'
-                                        'Database=Travel DB;'
-                                        'Trusted_Connection=yes;')
+            dbConnection = connection = pypyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
+            'Server=Server=sqlpython.centralindia.cloudapp.azure.com;'
+            'Database=master;'
+            'encrypt=yes;'
+            'TrustServerCertificate=yes;'
+            'UID=sa;'
+            'PWD=Sqlserver@123',autocommit = True)
+            connection.close()
+
+            dbConnection=connection = pypyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
+            'Server=Server=sqlpython.centralindia.cloudapp.azure.com;'
+            'Database=MoviesWorld;'
+            'encrypt=yes;'
+            'TrustServerCertificate=yes;'
+            'UID=sa;'
+            'PWD=Sqlserver@123',autocommit = True)
+
+            print('data base')
 
             if dbConnection.getinfo != None:
                 cursor = dbConnection.cursor()
@@ -31,3 +46,7 @@ class databaseConnection:
             cursor.close()
             dbConnection.close()
             print("db connection closed")
+
+d= databaseConnection()
+
+d.openDbConnection()

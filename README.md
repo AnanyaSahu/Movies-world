@@ -20,6 +20,8 @@ The time when purchasing tickets required standing in line outside the theatre i
 8)	Modify Ticket: The app should allow users to modify their ticket details and can update their names.
 
 
+**NOTE:** We have added testing test.py file for all the core business logic.
+
 [![Github Link](https://github.com/AnanyaSahu/Movies-world)](https://github.com/AnanyaSahu/Movies-world)
 
 
@@ -37,7 +39,7 @@ The time when purchasing tickets required standing in line outside the theatre i
 **Ananya Sahu (10627321)**
 Our business concept was to develop an app that allows users to search theatres and book movie tickets. I began by creating the original repository base on GitHub and the database so that the group could begin working on the business that we created. Our project includes four parts, and we separated the jobs such that everyone is working on a different section of the program. 
 My contribution was to create a book tickets module, where the user could choose their preferred seat and purchase the ticket. Any movie ticket purchasing has a criterion where if the customer's age is less than the age restriction for the movie, he will not be able to book the tickets. This module also contains a booking modification capability, allowing users to cancel their reservations or edit the customer's name.
-I was also in charge of developing the Frontend framework (HTML + JavaScript) and creating APIs to interact between the Frontend framework and the backend (Python). I've also built up VMs on Azure for our application and a cloud database. My work also included combining the team's efforts in terms of module integration.
+I was also in charge of developing the Frontend framework (HTML + JavaScript) and creating APIs to interact between the Frontend framework and the backend (Python). I was responsible for creating most of the test cases for testing the business logic. I've also built up VMs on Azure for our application and a cloud database. My work also included combining the team's efforts in terms of module integration.
 
 **Baran Azak (10636432)**
 My task in our project was to create a get-ticket page and fetch the movie booking for a particular booking ID from Movie Database, I set the important details for the ticket such as theater name, theater area, customer name, etc. By using particular “booking_id”, I gathered all the details about ticket and created a file that will contain all details about ticket and saved this file as “bookingdetails.txt”. Also created a method for the user to download this txt file by using URL. Finally, we have fixed the parts of the project that are not working properly and added things that need to be added.
