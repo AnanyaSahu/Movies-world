@@ -190,26 +190,24 @@ function showBookedSeats(bookingIdForCustomer) {
     ele =''
         fetch(prefix+'/getTicket/'+bookingIdForCustomer, {
             method: 'GET',
-           
         }).then(response => response.json())
         .then((data) => {
             console.log(data)
             var getTicketCotainer = document.getElementById("booked-ticket-content");
             getTicketCotainer.style.display = 'block'
-                customerName= data.rows[0][2]
-                theaterName = data.rows[0][0]
-                movieName = data.rows[0][3]
-                movieTime = data.rows[0][4]
-                seats= data.rows[0][5]
+                customerName= data.rows[0][3]
+                theaterName = data.rows[0][1]
+                movieName = data.rows[0][4]
+                movieTime = data.rows[0][5]
+                seats= data.rows[0][6]
                 
                 console.log(getTicketCotainer)
                 ele =''
-                ele += "<div class='' id='customer-name' >"+ customerName+"</div>"
-                ele += "<div class='' id='theater-name'>"+ theaterName+"</div>"
-                ele += "<div class='' id='movie-name'>"+ movieName+"</div>"
-                ele += "<div class='' id='movie-time'>"+ movieTime+"</div>"
-                ele += "<div class='' id='seat-selected'>"+ seats+"</div>"
-                // ele += "<div><button id='ply-modal-btn' type='button' class='btn-primary' onclick='downlaodTickets()>Downlaod Tickets</button></div>"
+                ele += "<div class='' id='customer-name' > Customer Name: &nbsp;"+ customerName+"</div>"
+                ele += "<div class='' id='theater-name' >Theater Name: &nbsp;"+ theaterName+"</div>"
+                ele += "<div class='' id='movie-name' >Movie Name: &nbsp;"+ movieName+"</div>"
+                ele += "<div class='' id='movie-time'>Show Timing: &nbsp;"+ movieTime+"</div>"
+                ele += "<div class='' id='seat-selected'>Selected Seats: &nbsp;"+ seats+"</div>"
                 getTicketCotainer.innerHTML = ele
     }).catch( err => {
         alert('unable to fetch details')

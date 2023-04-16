@@ -66,14 +66,12 @@ class TestStringMethods(unittest.TestCase):
        cursor= Mock()
        db = databaseConnection()
        db.openDbConnection = MagicMock(return_value=cursor)
-       expected_rows = [(1, 'Movie A'), (2, 'Movie B')]
        s = getMovieShow()
        result = s.get_movies_by_theatre(101)
        self.assertGreaterEqual(len(result['rows']), 0)
     
     def test_get_movies_for_invalid_theatre_id(self):
        # Test with an invalid theatre ID
-       expected_rows = []
        s = getMovieShow()
        result = s.get_movies_by_theatre(99)
        self.assertGreaterEqual(len(result['rows']), 0)

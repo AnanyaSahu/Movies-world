@@ -1,5 +1,4 @@
 from database import databaseConnection
-from flask import Flask
 
 class bookTicketsForCustomer:
     def __init__(self):
