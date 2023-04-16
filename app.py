@@ -69,7 +69,7 @@ def  getMovieTickets(bookingId):
     c= createTicketsForBookings()
     return c.createTicket(bookingId)
 
-# This method will get the tickets for the user, input is booking id
+# This will render the template on cloud
 @app.route('/')
 def  landPage():
     return render_template('template/index.html')
