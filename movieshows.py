@@ -8,7 +8,7 @@ class getMovieShow:
   def get_movies_by_theatre(self,theatreId):
     d = databaseConnection()
     cursor = d.openDbConnection()
-    getMovieByTheaterQuery = "SELECT tm.id, tm.theaterId ,tm.movieId, m.movieName, m.showTiming, m.duration, m.ageConstraint FROM [movieDb].[dbo].[TheaterMovie] tm INNER JOIN [movieDb].[dbo].[Movie] m  on tm.movieId = m.movieId where tm.theaterId = "+ str(theatreId) 
+    getMovieByTheaterQuery = "SELECT tm.id, tm.theaterId ,tm.movieId, m.movieName, m.showTiming, m.duration, m.ageConstraint FROM [MoviesWorld].[dbo].[TheaterMovie] tm INNER JOIN [MoviesWorld].[dbo].[Movie] m  on tm.movieId = m.movieId where tm.theaterId = "+ str(theatreId) 
     record = cursor.execute(getMovieByTheaterQuery).fetchall()
     r= [tuple(row) for row in record]
     return {'rows': r}

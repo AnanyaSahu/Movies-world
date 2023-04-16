@@ -10,8 +10,8 @@ class bookTicketsForCustomer:
         listOfSeatBooked =[]
         d = databaseConnection()
         cursor = d.openDbConnection()
-        getTherterQuery = "SELECT [thearerName],[areaId],[rowRange],[ColumnRange] FROM [movieDb].[dbo].[Theater] where [theaterId] = "+theaterId +";"
-        getBookedTickets = "SELECT [seatBooked] FROM [movieDb].[dbo].[Booking] where [theraterId] = "+theaterId +" AND [movieId]='"+ movieId  +"';"
+        getTherterQuery = "SELECT [thearerName],[areaId],[rowRange],[ColumnRange] FROM [MoviesWorld].[dbo].[Theater] where [theaterId] = "+theaterId +";"
+        getBookedTickets = "SELECT [seatBooked] FROM [MoviesWorld].[dbo].[Booking] where [theraterId] = "+theaterId +" AND [movieId]='"+ movieId  +"';"
         cursor.execute(getTherterQuery)
         record = cursor.fetchall()
         row = record[0][2].split(',')
@@ -37,11 +37,11 @@ class bookTicketsForCustomer:
     def bookTickets(self,customerName, customerAge ,theraterId, movieId,seats):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        movieQuery = "SELECT [movieId],[movieName],[ageConstraint] FROM [movieDb].[dbo].[Movie] WHERE [movieId]= "+movieId+";"
-        getBookingQuery = "SELECT * FROM [movieDb].[dbo].[Booking] WHERE theraterId = " + theraterId+" AND movieId = "+movieId+" AND customerName = '" + customerName+"' AND seatBooked = '"+ seats+"';"
+        movieQuery = "SELECT [movieId],[movieName],[ageConstraint] FROM [MoviesWorld].[dbo].[Movie] WHERE [movieId]= "+movieId+";"
+        getBookingQuery = "SELECT * FROM [MoviesWorld].[dbo].[Booking] WHERE theraterId = " + theraterId+" AND movieId = "+movieId+" AND customerName = '" + customerName+"' AND seatBooked = '"+ seats+"';"
         record = cursor.execute(movieQuery).fetchall()
         if(int(customerAge) >= record[0][2]):
-            bookTicketsQuery = "INSERT INTO [movieDb].[dbo].[Booking] ([theraterId],[movieId],[seatBooked],[customerName]) VALUES(?,?,?,?);"
+            bookTicketsQuery = "INSERT INTO [MoviesWorld].[dbo].[Booking] ([theraterId],[movieId],[seatBooked],[customerName]) VALUES(?,?,?,?);"
             cursor.execute(bookTicketsQuery, theraterId , movieId, seats,customerName)
             cursor.commit()
             record = cursor.execute(getBookingQuery).fetchall()
@@ -55,7 +55,7 @@ class bookTicketsForCustomer:
     def cancelUserBooking( self,bookingId):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        cancelBookingQuery = "DELETE FROM [movieDb].[dbo].[Booking] WHERE [bookingId]= "+str(bookingId)
+        cancelBookingQuery = "DELETE FROM [MoviesWorld].[dbo].[Booking] WHERE [bookingId]= "+str(bookingId)
         cursor.execute(cancelBookingQuery)
         cursor.commit()
         return {'msg':'Your booking has been cancelled'}
@@ -64,7 +64,7 @@ class bookTicketsForCustomer:
     def  getBookingsForCustomer(self,name):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        getBookingsForCustomerQuery = "SELECT b.bookingId , b.customerName, b.seatBooked ,m.movieId,m.movieName , m.showTiming, t.theaterId, t.thearerName from [movieDb].[dbo].[Booking] b Inner join [movieDb].[dbo].[Theater] t on t.theaterId = b.theraterId Inner join [movieDb].[dbo].[Movie] m on m.movieId = b.movieId where b.customerName ='"+name +"';" 
+        getBookingsForCustomerQuery = "SELECT b.bookingId , b.customerName, b.seatBooked ,m.movieId,m.movieName , m.showTiming, t.theaterId, t.thearerName from [MoviesWorld].[dbo].[Booking] b Inner join [MoviesWorld].[dbo].[Theater] t on t.theaterId = b.theraterId Inner join [MoviesWorld].[dbo].[Movie] m on m.movieId = b.movieId where b.customerName ='"+name +"';" 
         record = cursor.execute(getBookingsForCustomerQuery).fetchall()
         r= [tuple(row) for row in record]
         return {'rows': r}
@@ -73,7 +73,7 @@ class bookTicketsForCustomer:
     def updateCustomerName(self,bookingID, newCustomerName):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        updateCustomerNameQuery = "UPDATE [movieDb].[dbo].[Booking] SET [customerName] = '"+ newCustomerName+"' WHERE [bookingID]= "+str(bookingID)
+        updateCustomerNameQuery = "UPDATE [MoviesWorld].[dbo].[Booking] SET [customerName] = '"+ newCustomerName+"' WHERE [bookingID]= "+str(bookingID)
 
         cursor.execute(updateCustomerNameQuery)
         cursor.commit()
