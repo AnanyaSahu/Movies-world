@@ -69,7 +69,7 @@ def  getMovieTickets(bookingId):
     return c.createTicket(bookingId)
 
 # This method will get the tickets for the user, input is booking id
-@app.route('/', methods=['GET'])
+@app.route('/')
 def  landPage():
     mt = movieTheater()
     return mt.getAreas()
