@@ -1,6 +1,7 @@
 from flask import Flask
 # from flask_mysqldb import MySQL
 # from flask_cors import CORS
+from flask import Flask, render_template, request
 from booktickets import bookTicketsForCustomer
 from movietheaters import movieTheater
 from movieshows import  getMovieShow
