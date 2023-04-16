@@ -7,7 +7,7 @@ class movieTheater:
     def  getAreas(self):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        getAreaQuery = "SELECT *FROM  [movieDb].[dbo].[Area];" 
+        getAreaQuery = "SELECT *FROM  [MoviesWorld].[dbo].[Area];" 
         record = cursor.execute(getAreaQuery).fetchall()
         r= [tuple(row) for row in record]
         return {'rows': r}
@@ -17,7 +17,7 @@ class movieTheater:
     def get_nearby_theaters(self,area):
         d = databaseConnection()
         cursor = d.openDbConnection()
-        getNearByTheaterQuery = "SELECT t.thearerName, t.theaterId, a.areaId, a.areaName, abs(a.location-"+str(area)+"), t.rowRange, t.ColumnRange FROM [movieDb].[dbo].[Theater] t Inner join [movieDb].[dbo].Area a ON t.areaId = a.areaId group by t.thearerName, t.theaterId, a.areaId, a.areaName,abs(a.location-"+str(area)+"), t.rowRange, t.ColumnRange  order by abs(a.location-"+str(area)+");" 
+        getNearByTheaterQuery = "SELECT t.thearerName, t.theaterId, a.areaId, a.areaName, abs(a.location-"+str(area)+"), t.rowRange, t.ColumnRange FROM [MoviesWorld].[dbo].[Theater] t Inner join [MoviesWorld].[dbo].Area a ON t.areaId = a.areaId group by t.thearerName, t.theaterId, a.areaId, a.areaName,abs(a.location-"+str(area)+"), t.rowRange, t.ColumnRange  order by abs(a.location-"+str(area)+");" 
         record = cursor.execute(getNearByTheaterQuery).fetchall()
         r= [tuple(row) for row in record]
         return {'rows': r}
