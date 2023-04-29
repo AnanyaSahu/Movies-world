@@ -22,7 +22,7 @@ function openTab(evt, TabName) {
 
 //   Display seated on ui
 function showSeats(theaterId,movieId) {
-    fetch(prefix+'/showSeats/'+theaterId+'/'+movieId, {
+    fetch('/showSeats/'+theaterId+'/'+movieId, {
         method: 'GET',
        
     }).then(response => response.json())
@@ -95,7 +95,7 @@ function showselectedseats(){
 function showAreaDropdownItems() {
     var arealist = document.getElementById("area-list");
     ele =''
-    fetch(prefix+'/getAreaList/', {
+    fetch('/getAreaList/', {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
@@ -120,7 +120,7 @@ var theaterConatiner = document.getElementById("display-theater");
 function showTheaters(area) {
     ele =''
     var arealist = document.getElementById("theater-list");
-    fetch(prefix+'/getTheratersList/'+area, {
+    fetch('/getTheratersList/'+area, {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
@@ -141,7 +141,7 @@ function selectTheater(theaterId) {
     var movieListContainer = document.getElementById("movie-list");
     var ele =''
     movieConatiner.style.display = 'block'
-    fetch(prefix+'/getMovieList/'+theaterId, {
+    fetch('/getMovieList/'+theaterId, {
         method: 'GET',
     }).then(response => response.json())
     .then((data) => {
@@ -167,8 +167,8 @@ function selectMovie(theaterId, movieId ) {
 function bookTickets( ) {
     customerName =document.forms["bookingFrom"]["booking-customer-name"].value;
     customerAge =document.forms["bookingFrom"]["age"].value;
-    fetch(prefix+'/bookTickets/'+customerName+'/'+customerAge+'/'+selectedTheater+'/'+selectedMovie+'/'+selectedSeatsCustomer, {
-        method: 'GET',
+    fetch('/bookTickets/'+customerName+'/'+customerAge+'/'+selectedTheater+'/'+selectedMovie+'/'+selectedSeatsCustomer, {
+        method: 'POST',
     }).then(response => response.json())
     .then((data) => {
         if(data.rows.length > 0){
@@ -185,10 +185,8 @@ function bookTickets( ) {
 
 //show book tickets for user
 function showBookedSeats(bookingIdForCustomer) {
-    console.log('get tickets')
-    console.log(bookingIdForCustomer)
-    ele =''
-        fetch(prefix+'/getTicket/'+bookingIdForCustomer, {
+      ele =''
+        fetch('/getTicket/'+bookingIdForCustomer, {
             method: 'GET',
         }).then(response => response.json())
         .then((data) => {
@@ -223,7 +221,7 @@ function getBookingsForCustomer(){
     userbooking.style.display = 'block'
 
     ele =''
-    fetch(prefix+'/getBookingsForCustomer/'+name, {
+    fetch('/getBookingsForCustomer/'+name, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -266,8 +264,8 @@ function getBookingsForCustomer(){
 
 //cancel bookings for customer
     function cancelBookingForUser() {
-        fetch(prefix+'/cancelTickets/'+bookingIdForCustomer, {
-            method: 'GET',
+        fetch('/cancelTickets/'+bookingIdForCustomer, {
+            method: 'DELETE',
         })
             .then(response => {
             alert('Your booking has been cancelled')
@@ -283,8 +281,8 @@ function getBookingsForCustomer(){
     //modify bookings for customer
     function modifyBookingForUser(){
         var newCustomerName =  document.forms["CancelBookingFrom"]["new-name"].value;
-        fetch(prefix+'/updateTickets/'+bookingIdForCustomer+'/'+newCustomerName, {
-            method: 'GET',
+        fetch('/updateTickets/'+bookingIdForCustomer+'/'+newCustomerName, {
+            method: 'POST',
         }).then(response => {
             alert('Your booking has been modified')
         }).catch( err => {
